@@ -3,8 +3,8 @@ const { getRandomNumber, isOptionValid, removeItemsByIndex } = require('./utils'
 const { Heralds } = require('./heralds');
 
 class Tournament {
-  constructor(maxParticipantsNum) {
-    this._maxMembersNum = maxParticipantsNum;
+  constructor(maxMembersNum) {
+    this._maxMembersNum = maxMembersNum;
     this._members = [];
   }
 
@@ -99,18 +99,23 @@ class Tournament {
     while (firstMember.isAlive() && secondMember.isAlive()) {
       firstMember.attack(secondMember);
       secondMember.isAlive() && secondMember.attack(firstMember);
+      console.log(`${firstMember.name} attack by ${firstMember.getDamage()}`);
+      console.log(`${secondMember.name} attack by ${secondMember.getDamage()}`);
+      console.log(`${firstMember.name} hp: ${firstMember.getHealth()}`);
+      console.log(`${secondMember.name} hp: ${secondMember.getHealth()}`);
+      console.log('----');
     }
   }
 
   preparationForBattle(member) {
-    member.attemptToUseMagicDrink() && Heralds.magicDrinkAlert(member.name);
+    member.attemptToActivateBoost() && Heralds.declareBoostActivation(member.name)
   }
 
   getBattleWinnerAndDeclareLoser(pair) {
     let winner = {};
     pair.forEach(member => {
       if (member.isAlive()) {
-        member.restoreHealth();
+        member.restoreCharProps();
         Heralds.declareBattleWinner(member.name);
         winner = member;
       } else {

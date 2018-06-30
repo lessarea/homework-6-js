@@ -4,8 +4,9 @@ class Character {
     this._health = health;
     this._damage = damage;
     this._charClass = charClass;
-    this._magicDrink = false;
+    this._boost = false;
     this._counter = 2;
+    this._boostCounter = this._counter;
     this._maxHealth = health;
   }
 
@@ -18,27 +19,41 @@ class Character {
   }
 
   get boost() {
-    return this._magicDrink;
+    return this._boost;
   }
 
-  restoreHealth() {
-    this._health = this._maxHealth
+  get counter() {
+    return this._counter;
+  }
+
+  get boostCounter() {
+    return this._boostCounter;
+  }
+
+  getHealth() {
+    return this._health;
+  }
+
+  restoreCharProps() {
+    this._health = this._maxHealth;
+    this._counter = 2;
+    this._boostCounter = this._counter;
   }
 
   attack(target) {
-    target.health = this._damage;
+    target.setHealth(this._damage);
   }
 
-  attemptToUseMagicDrink() {
-    this._magicDrink = Math.random() <= 0.3;
-  }
-
-  shouldUseSkill() {
-    return (this._health < this._maxHealth / 2 && this._counter > 0);
+  shouldUseSkill(counter) {
+    return this._health < this._maxHealth / 2 && counter > 0;
   }
 
   isAlive() {
     return this._health > 0;
+  }
+
+  attemptToActivateBoost() {
+    return this._boost = Math.random() <= 0.3;
   }
 }
 

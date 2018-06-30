@@ -7,18 +7,18 @@ class Heralds {
     console.log(`Извини, ${name}, мы не подходим друг другу и дело в тебе`)
   }
 
-  static magicDrinkAlert(name) {
-    console.log(`${name} использует волшебный напиток`);
+  static declareBoostActivation(name) {
+    console.log(`${name} активирует супер способность`);
   }
 
   static declareRoundStart() {
-    console.log('---');
+    console.log('--------');
     console.log('LET THE BATTLE BEGIN');
   }
 
   static declareBattleStepStart(firstMemberName, secondMemberName) {
-    console.log('---');
-    console.log(`${firstMemberName} vs ${secondMemberName}`);
+    console.log('--------');
+    console.log(`${firstMemberName} vs ${secondMemberName}`.toUpperCase());
     console.log('-');
   }
 

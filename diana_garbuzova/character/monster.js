@@ -5,18 +5,20 @@ class Monster extends Character {
     super(name, health, damage, monsterClass)
   }
 
-  get damage() {
-    if (this.shouldUseSkill()) {
+  getDamage() {
+    if (this.shouldUseSkill(this.counter)) {
       this._counter--;
+      console.log(`${this.name} наносит ДВОЙНОЙ удар`);
       return this._damage * 2;
     }
     return this._damage;
   }
 
-  set health(damage) {
-    if (this.shouldUseSkill() && this.boost) {
-      this._counter--;
-      console.log(this.name + ' отражает удар');
+  setHealth(damage) {
+    if (this.shouldUseSkill(this.boostCounter) && this.boost) {
+      this._boostCounter--;
+      console.log(this.name + ' ОТРАЖАЕТ удар');
+      return;
     }
     this._health -= damage;
   }
